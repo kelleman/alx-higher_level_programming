@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""
-Update the table
+"""Start link class to table in database
 """
 if __name__ == '__main__':
     import sys
@@ -17,9 +16,13 @@ if __name__ == '__main__':
 
     Session = sessionmaker(bind=engine)
     session = Session()
-    query = session.query(State).filter_by(id=2)
-    query.update({State.name: "New Mexico"}, synchronize_session=False)
+
+    new_name = "Louisiana"
+    new_state = State(name=new_name)
+    session.add(new_state)
     session.commit()
+
+    print(new_state.id)
 
     session.close()
 
